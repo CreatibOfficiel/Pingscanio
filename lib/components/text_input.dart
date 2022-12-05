@@ -5,8 +5,13 @@ import 'package:pingscanio/theme/text_styles.dart';
 class TextInput extends StatelessWidget {
   final String label;
   final String hint;
+  final TextEditingController controller;
 
-  const TextInput({super.key, required this.label, required this.hint});
+  const TextInput(
+      {super.key,
+      required this.label,
+      required this.hint,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +26,7 @@ class TextInput extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: controller,
           cursorColor: ThemeColor.neutralColor_300,
           style: ThemeText.textRegular.copyWith(
             color: ThemeColor.neutralColor_300,

@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pingscanio/components/round_back_button.dart';
 import 'package:pingscanio/components/round_button.dart';
-import 'package:pingscanio/components/round_button_back.dart';
 import 'package:pingscanio/components/text_input.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
@@ -13,7 +14,27 @@ class AddPlayer extends StatefulWidget {
 }
 
 class _AddPlayerState extends State<AddPlayer> {
-  void addUser() {}
+  // test all the text inputs
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _urlController = TextEditingController();
+
+  bool _validate() {
+    return _lastNameController.text.isNotEmpty &&
+        _firstNameController.text.isNotEmpty &&
+        _urlController.text.isNotEmpty &&
+        (_urlController.text.startsWith('http') ||
+            _urlController.text.startsWith('https')) &&
+        (_urlController.text.endsWith('.png') ||
+            _urlController.text.endsWith('.jpg') ||
+            _urlController.text.endsWith('.jpeg'));
+  }
+
+  void addUser() {
+    if (kDebugMode) {
+      print(_validate());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +43,11 @@ class _AddPlayerState extends State<AddPlayer> {
           child: ListView(
         padding: const EdgeInsets.only(left: 16, right: 16),
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const RoundButtonBack(),
-              const SizedBox(width: 16),
-              Text(
-                "Ajouter un joueur",
-                style: ThemeText.textTitle.copyWith(
-                  color: ThemeColor.neutralColor_100,
-                ),
-              ),
-            ],
+          Text(
+            'Ajouter un joueur',
+            style: ThemeText.textTitle.copyWith(
+              color: ThemeColor.neutralColor_300,
+            ),
           ),
           Text(
             "Nouveau astronaute ?",
@@ -42,30 +56,43 @@ class _AddPlayerState extends State<AddPlayer> {
             ),
           ),
           const SizedBox(height: 32),
-          const TextInput(
-              label: "Nom du joueur", hint: "Entre le nom du nouveau joueur"),
+          TextInput(
+              label: "Nom du joueur",
+              hint: "Entre le nom du nouveau joueur",
+              controller: _lastNameController),
           const SizedBox(height: 32),
-          const TextInput(
+          TextInput(
               label: "Prénom du joueur",
-              hint: "Entre le prénom du nouveau joueur"),
+              hint: "Entre le prénom du nouveau joueur",
+              controller: _firstNameController),
           const SizedBox(height: 32),
-          const TextInput(
+          TextInput(
               label: "Image de profil",
-              hint: "Entre le lien de l'image de profil"),
+              hint: "Entre le lien de l'image de profil",
+              controller: _urlController),
         ],
       )),
       bottomNavigationBar: BottomAppBar(
-        color: ThemeColor.primaryColor,
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-          child: RoundButton(
-            text: "Ajouter",
-            disabled: false,
-            onPressed: addUser,
-          ),
-        ),
-      ),
+          color: ThemeColor.primaryColor,
+          child: Container(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            height: 96,
+            child: Row(children: [
+              const Expanded(
+                child: RoundBackButton(
+                  text: "Annuler",
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: RoundButton(
+                  text: "Ajouter",
+                  enabled: _validate(),
+                  onPressed: addUser,
+                ),
+              ),
+            ]),
+          )),
     );
   }
 }

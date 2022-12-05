@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
 
-class RoundButton extends StatelessWidget {
+class RoundBackButton extends StatelessWidget {
   final String text;
-  final bool enabled;
-  final VoidCallback onPressed;
 
-  const RoundButton({
+  const RoundBackButton({
     super.key,
     required this.text,
-    required this.enabled,
-    required this.onPressed,
   });
 
   @override
@@ -19,11 +15,15 @@ class RoundButton extends StatelessWidget {
     return SizedBox(
       height: 64,
       child: ElevatedButton(
-        onPressed: enabled ? onPressed : () => {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         style: ElevatedButton.styleFrom(
-          backgroundColor: enabled
-              ? ThemeColor.primaryColor_500
-              : ThemeColor.neutralColor_500,
+          backgroundColor: Colors.transparent,
+          side: const BorderSide(
+            color: ThemeColor.primaryColor_500,
+            width: 2,
+          ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
@@ -31,9 +31,7 @@ class RoundButton extends StatelessWidget {
         child: Text(
           text,
           style: ThemeText.textBold.copyWith(
-            color: enabled
-                ? ThemeColor.neutralColor_900
-                : ThemeColor.neutralColor_600,
+            color: ThemeColor.primaryColor_500,
           ),
         ),
       ),
