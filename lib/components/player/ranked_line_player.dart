@@ -1,7 +1,6 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
-class PlayerLine extends StatelessWidget {
+class RankedLinePlayer extends StatelessWidget {
   final bool? isSelectable;
   final bool? isSelected;
 
@@ -13,7 +12,7 @@ class PlayerLine extends StatelessWidget {
   final int? elo;
   final int? winrate;
 
-  const PlayerLine(
+  const RankedLinePlayer(
       {super.key,
       this.isSelectable,
       this.isSelected,

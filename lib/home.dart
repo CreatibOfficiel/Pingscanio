@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pingscanio/screens/player/add_player.dart';
-import 'package:pingscanio/screens/match/add_match.dart';
+import 'package:pingscanio/screens/match/select_player.dart';
 import 'package:pingscanio/screens/matches.dart';
 import 'package:pingscanio/screens/ranking.dart';
 import 'package:pingscanio/theme/colors.dart';
@@ -31,7 +30,7 @@ class _HomeState extends State<Home> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddMatch(),
+              builder: (context) => const SelectPlayer(),
             ),
           );
         },

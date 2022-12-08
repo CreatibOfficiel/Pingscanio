@@ -6,12 +6,14 @@ class TextInput extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
+  final Function(String text) onChanged;
 
   const TextInput(
       {super.key,
       required this.label,
       required this.hint,
-      required this.controller});
+      required this.controller,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class TextInput extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          onChanged: onChanged,
           controller: controller,
           cursorColor: ThemeColor.neutralColor_300,
           style: ThemeText.textRegular.copyWith(

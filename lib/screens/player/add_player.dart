@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pingscanio/components/round_back_button.dart';
-import 'package:pingscanio/components/round_button.dart';
+import 'package:pingscanio/components/button/round_back_button.dart';
+import 'package:pingscanio/components/button/round_button.dart';
 import 'package:pingscanio/components/text_input.dart';
+import 'package:pingscanio/database/services/player_service.dart';
+import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
 
@@ -14,10 +16,25 @@ class AddPlayer extends StatefulWidget {
 }
 
 class _AddPlayerState extends State<AddPlayer> {
-  // test all the text inputs
+  @override
+  void initState() {
+    super.initState();
+    _lastNameController.addListener(_validate);
+    _firstNameController.addListener(_validate);
+    _urlController.addListener(_validate);
+  }
+
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
+
+  bool _isAllValid = false;
+
+  void onTextChanged(String text) {
+    setState(() {
+      _isAllValid = _validate();
+    });
+  }
 
   bool _validate() {
     return _lastNameController.text.isNotEmpty &&
@@ -32,46 +49,71 @@ class _AddPlayerState extends State<AddPlayer> {
 
   void addUser() {
     if (kDebugMode) {
-      print(_validate());
+      print(_isAllValid);
     }
+
+    Player newPlayer = Player(
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        profilePictureUrl: _urlController.text);
+
+    if (_isAllValid) {
+      PlayerService().createPlayer(newPlayer);
+    }
+
+    SnackBar snackBar = SnackBar(
+      content: const Text('Joueur ajouté'),
+      action: SnackBarAction(
+        label: 'Annuler',
+        onPressed: () {
+          PlayerService().deletePlayer(newPlayer);
+        },
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          margin: const EdgeInsets.only(left: 16, right: 16),
           child: ListView(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        children: [
-          Text(
-            'Ajouter un joueur',
-            style: ThemeText.textTitle.copyWith(
-              color: ThemeColor.neutralColor_300,
-            ),
-          ),
-          Text(
-            "Nouveau astronaute ?",
-            style: ThemeText.textRegular.copyWith(
-              color: ThemeColor.neutralColor_300,
-            ),
-          ),
-          const SizedBox(height: 32),
-          TextInput(
-              label: "Nom du joueur",
-              hint: "Entre le nom du nouveau joueur",
-              controller: _lastNameController),
-          const SizedBox(height: 32),
-          TextInput(
-              label: "Prénom du joueur",
-              hint: "Entre le prénom du nouveau joueur",
-              controller: _firstNameController),
-          const SizedBox(height: 32),
-          TextInput(
-              label: "Image de profil",
-              hint: "Entre le lien de l'image de profil",
-              controller: _urlController),
-        ],
-      )),
+            children: [
+              Text(
+                'Ajouter un joueur',
+                style: ThemeText.textTitle.copyWith(
+                  color: ThemeColor.neutralColor_300,
+                ),
+              ),
+              Text(
+                "Nouveau astronaute ?",
+                style: ThemeText.textRegular.copyWith(
+                  color: ThemeColor.neutralColor_300,
+                ),
+              ),
+              const SizedBox(height: 32),
+              TextInput(
+                  label: "Nom du joueur",
+                  hint: "Entre le nom du nouveau joueur",
+                  controller: _lastNameController,
+                  onChanged: onTextChanged),
+              const SizedBox(height: 32),
+              TextInput(
+                  label: "Prénom du joueur",
+                  hint: "Entre le prénom du nouveau joueur",
+                  controller: _firstNameController,
+                  onChanged: onTextChanged),
+              const SizedBox(height: 32),
+              TextInput(
+                  label: "Image de profil",
+                  hint: "Entre le lien de l'image de profil",
+                  controller: _urlController,
+                  onChanged: onTextChanged),
+            ],
+          )),
       bottomNavigationBar: BottomAppBar(
           color: ThemeColor.primaryColor,
           child: Container(
@@ -87,7 +129,7 @@ class _AddPlayerState extends State<AddPlayer> {
               Expanded(
                 child: RoundButton(
                   text: "Ajouter",
-                  enabled: _validate(),
+                  enabled: _isAllValid,
                   onPressed: addUser,
                 ),
               ),

@@ -13,6 +13,7 @@ class ThemeColor {
   static const neutralColor_400 = Color(0xFF94A6B8);
   static const neutralColor_500 = Color(0xFF64788B);
   static const neutralColor_600 = Color(0xFF475869);
+  static const neutralColor_700 = Color(0xFF334455);
   static const neutralColor_750 = Color(0xFF334455);
   static const neutralColor_800 = Color(0xFF1E2D3B);
   static const neutralColor_900 = Color(0xFF0F1D2A);

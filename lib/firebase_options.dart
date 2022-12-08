@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyByZ2ByTHrkBZcIaLZ1A6Y5ukafIYHNFFQ',
-    appId: '1:850377508813:android:160cab4e3ae6684d87e684',
-    messagingSenderId: '850377508813',
-    projectId: 'pingscanio-1cb91',
-    storageBucket: 'pingscanio-1cb91.appspot.com',
+    apiKey: 'AIzaSyCVD2c0oIKkBiZlPlactyUhCGQBRF92QMA',
+    appId: '1:882042483837:android:aa98f0ebf081495fae6d14',
+    messagingSenderId: '882042483837',
+    projectId: 'pingscanio-10be2',
+    storageBucket: 'pingscanio-10be2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC16PRwhNu1RuJxY_74BVlk7lPUyKbsjPY',
-    appId: '1:850377508813:ios:d885758a19167e4287e684',
-    messagingSenderId: '850377508813',
-    projectId: 'pingscanio-1cb91',
-    storageBucket: 'pingscanio-1cb91.appspot.com',
-    iosClientId: '850377508813-cuda7barjtdagjnar69jcgv2u0qdnuvj.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDOaj5W8SFeNt-5VCpbS-lwEY0-UipSJZU',
+    appId: '1:882042483837:ios:cb7077c05f711bb9ae6d14',
+    messagingSenderId: '882042483837',
+    projectId: 'pingscanio-10be2',
+    storageBucket: 'pingscanio-10be2.appspot.com',
+    iosClientId: '882042483837-t2bf0c7a6bqqf38lhunr0usd4rftidht.apps.googleusercontent.com',
     iosBundleId: 'com.example.pingscanio',
   );
 }

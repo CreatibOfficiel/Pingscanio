@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "850377508813",
-    "project_id": "pingscanio-1cb91",
-    "storage_bucket": "pingscanio-1cb91.appspot.com"
+    "project_number": "882042483837",
+    "project_id": "pingscanio-10be2",
+    "storage_bucket": "pingscanio-10be2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:850377508813:android:160cab4e3ae6684d87e684",
+        "mobilesdk_app_id": "1:882042483837:android:aa98f0ebf081495fae6d14",
         "android_client_info": {
           "package_name": "com.example.pingscanio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "850377508813-brug3ke2l30vsmu2l869or3ti39e473v.apps.googleusercontent.com",
+          "client_id": "882042483837-dgsg4utcs14olmlevh6cfggkqccuke7n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyByZ2ByTHrkBZcIaLZ1A6Y5ukafIYHNFFQ"
+          "current_key": "AIzaSyCVD2c0oIKkBiZlPlactyUhCGQBRF92QMA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "850377508813-brug3ke2l30vsmu2l869or3ti39e473v.apps.googleusercontent.com",
+              "client_id": "882042483837-dgsg4utcs14olmlevh6cfggkqccuke7n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
