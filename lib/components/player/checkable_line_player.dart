@@ -6,18 +6,18 @@ import 'package:pingscanio/theme/text_styles.dart';
 class CheckableLinePlayer extends StatelessWidget {
   final Player player;
   final Function(Player player) selectPlayer;
-  bool isSelected = false;
+  final bool isSelected;
 
-  CheckableLinePlayer(
+  const CheckableLinePlayer(
       {super.key,
       required this.player,
-      required this.selectPlayer(Player player)});
+      required this.selectPlayer(Player player),
+      required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        isSelected = !isSelected;
         selectPlayer(player);
       },
       child: Container(
@@ -35,7 +35,7 @@ class CheckableLinePlayer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const SizedBox(width: 16),
+            const SizedBox(width: 8),
             Container(
                 width: 24,
                 height: 24,
@@ -53,13 +53,15 @@ class CheckableLinePlayer extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.check,
-                  color: isSelected ? ThemeColor.neutralColor_900 : null,
+                  color: isSelected
+                      ? ThemeColor.neutralColor_900
+                      : Colors.transparent,
                   size: 16,
                 )),
             const SizedBox(width: 24),
             // round container with image
             CircleAvatar(
-              radius: 40,
+              radius: 20,
               backgroundImage: NetworkImage(player.profilePictureUrl),
             ),
             const SizedBox(width: 8),

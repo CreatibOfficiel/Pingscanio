@@ -9,7 +9,9 @@ import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
 
 class AddPlayer extends StatefulWidget {
-  const AddPlayer({super.key});
+  final VoidCallback refreshPlayers;
+
+  const AddPlayer({super.key, required this.refreshPlayers});
 
   @override
   State<AddPlayer> createState() => _AddPlayerState();
@@ -30,7 +32,7 @@ class _AddPlayerState extends State<AddPlayer> {
 
   bool _isAllValid = false;
 
-  void onTextChanged(String text) {
+  void _onTextChanged(String text) {
     setState(() {
       _isAllValid = _validate();
     });
@@ -40,8 +42,8 @@ class _AddPlayerState extends State<AddPlayer> {
     return _lastNameController.text.isNotEmpty &&
         _firstNameController.text.isNotEmpty &&
         _urlController.text.isNotEmpty &&
-        (_urlController.text.startsWith('http') ||
-            _urlController.text.startsWith('https')) &&
+        (_urlController.text.startsWith('http://') ||
+            _urlController.text.startsWith('https://')) &&
         (_urlController.text.endsWith('.png') ||
             _urlController.text.endsWith('.jpg') ||
             _urlController.text.endsWith('.jpeg'));
@@ -53,22 +55,17 @@ class _AddPlayerState extends State<AddPlayer> {
     }
 
     Player newPlayer = Player(
-        firstName: _firstNameController.text,
-        lastName: _lastNameController.text,
-        profilePictureUrl: _urlController.text);
+        firstName: _firstNameController.text.trim(),
+        lastName: _lastNameController.text.trim(),
+        profilePictureUrl: _urlController.text.trim());
 
     if (_isAllValid) {
       PlayerService().createPlayer(newPlayer);
+      widget.refreshPlayers();
     }
 
-    SnackBar snackBar = SnackBar(
-      content: const Text('Joueur ajouté'),
-      action: SnackBarAction(
-        label: 'Annuler',
-        onPressed: () {
-          PlayerService().deletePlayer(newPlayer);
-        },
-      ),
+    SnackBar snackBar = const SnackBar(
+      content: Text('Joueur·euse ajouté·e'),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -99,19 +96,19 @@ class _AddPlayerState extends State<AddPlayer> {
                   label: "Nom du joueur",
                   hint: "Entre le nom du nouveau joueur",
                   controller: _lastNameController,
-                  onChanged: onTextChanged),
+                  onChanged: _onTextChanged),
               const SizedBox(height: 32),
               TextInput(
                   label: "Prénom du joueur",
                   hint: "Entre le prénom du nouveau joueur",
                   controller: _firstNameController,
-                  onChanged: onTextChanged),
+                  onChanged: _onTextChanged),
               const SizedBox(height: 32),
               TextInput(
                   label: "Image de profil",
                   hint: "Entre le lien de l'image de profil",
                   controller: _urlController,
-                  onChanged: onTextChanged),
+                  onChanged: _onTextChanged),
             ],
           )),
       bottomNavigationBar: BottomAppBar(

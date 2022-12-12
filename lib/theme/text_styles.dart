@@ -38,4 +38,11 @@ abstract class ThemeText {
       fontSize: 12,
       height: 1.2,
       fontWeight: FontWeight.w400);
+
+  static const TextStyle scoreText = TextStyle(
+      fontFamily: 'Inter',
+      fontSize: 24,
+      height: 2.4,
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.w900);
 }
