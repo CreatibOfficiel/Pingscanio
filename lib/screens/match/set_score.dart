@@ -60,6 +60,8 @@ class _SetScoreState extends State<SetScore> {
       MaterialPageRoute(
           builder: (context) => RecapMatch(
                 sets: _sets,
+                firstPlayer: widget.firstPlayer,
+                secondPlayer: widget.secondPlayer,
               )),
     );
   }

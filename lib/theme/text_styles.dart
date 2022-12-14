@@ -11,7 +11,6 @@ abstract class ThemeText {
   static const TextStyle textHeading = TextStyle(
       fontFamily: 'TT Smalls',
       fontSize: 20,
-      height: 2.4,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w800);
 
@@ -45,4 +44,10 @@ abstract class ThemeText {
       height: 2.4,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w900);
+
+  static const TextStyle scoreTextBold = TextStyle(
+      fontFamily: 'TT Smalls',
+      fontSize: 40,
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.w800);
 }

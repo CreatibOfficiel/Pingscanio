@@ -55,10 +55,8 @@ class _SetScoreInputState extends State<SetScoreInput> {
   void createSet(Player winner) {
     MatchSet matchSet = MatchSet(
       setNumber: widget.setNumber,
-      firstPlayer: widget.firstPlayer,
-      secondPlayer: widget.secondPlayer,
-      firstPlayerScore: int.parse(_setScoreOfFirstPlayer.text),
-      secondPlayerScore: int.parse(_setScoreOfSecondPlayer.text),
+      winnerScore: int.parse(_setScoreOfFirstPlayer.text),
+      loserScore: int.parse(_setScoreOfSecondPlayer.text),
       winner: winner,
     );
 
