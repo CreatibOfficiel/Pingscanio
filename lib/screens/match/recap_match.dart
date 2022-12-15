@@ -1,5 +1,3 @@
-Recap Match
-
 import 'package:flutter/material.dart';
 import 'package:pingscanio/components/match/match_result_line.dart';
 import 'package:pingscanio/components/match/match_sets_detail.dart';

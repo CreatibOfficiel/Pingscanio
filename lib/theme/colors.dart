@@ -1,5 +1,3 @@
-Colors
-
 import 'package:flutter/material.dart';
 
 // create a class with all the colors used in the app
