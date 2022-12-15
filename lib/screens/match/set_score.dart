@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pingscanio/components/button/round_back_button.dart';
 import 'package:pingscanio/components/button/round_button.dart';
 import 'package:pingscanio/components/set/set_score_input.dart';
@@ -21,20 +20,22 @@ class SetScore extends StatefulWidget {
 }
 
 class _SetScoreState extends State<SetScore> {
-  List<MatchSet> _sets = [];
+  final List<MatchSet> _sets = [];
   bool _isAllValid = false;
+  bool _matchInThreeSets = false;
 
   void _addSet(MatchSet matchSet, int setNumber) {
-    if (setNumber == 3 && _areSetsComplete()) {
-      // victory in 2 sets, the third set is not needed
-      HapticFeedback.mediumImpact();
-      return;
+    // replace set if already exists
+    if (_sets.length == setNumber - 1) {
+      _sets.add(matchSet);
+    } else {
+      _sets[setNumber - 1] = matchSet;
     }
-    _sets.insert(setNumber - 1, matchSet);
 
     setState(() {
       _isAllValid = _areSetsComplete();
     });
+    return;
   }
 
   bool _areSetsComplete() {
@@ -46,10 +47,18 @@ class _SetScoreState extends State<SetScore> {
     if (_sets.length == 3 && _sets[0].winner != _sets[1].winner) {
       // victory in 3 sets
       return true;
-    } else if (_sets.length == 3 && _sets[0].winner == _sets[1].winner) {
-      // victory in 2 sets, too much sets
-      _sets.removeLast();
+    } else if (_sets.length == 2 && _sets[0].winner == _sets[1].winner) {
+      // victory in 2 sets
       return true;
+    } else if (_sets.length == 3 && _sets[0].winner == _sets[1].winner) {
+      // victory in 2 sets, too many sets so remove last one
+      _sets.removeLast();
+      _matchInThreeSets = false;
+      return true;
+    } else if (_sets.length == 2 && _sets[0].winner != _sets[1].winner) {
+      // victory in 3 sets, not enough sets
+      _matchInThreeSets = true;
+      return false;
     }
     return false;
   }
@@ -94,18 +103,22 @@ class _SetScoreState extends State<SetScore> {
                   secondPlayer: widget.secondPlayer,
                   setNumber: 1,
                   addSet: _addSet),
-              const SizedBox(height: 24),
-              SetScoreInput(
-                  firstPlayer: widget.firstPlayer,
-                  secondPlayer: widget.secondPlayer,
-                  setNumber: 2,
-                  addSet: _addSet),
-              const SizedBox(height: 24),
-              SetScoreInput(
-                  firstPlayer: widget.firstPlayer,
-                  secondPlayer: widget.secondPlayer,
-                  setNumber: 3,
-                  addSet: _addSet),
+              if (_sets.isNotEmpty) ...[
+                const SizedBox(height: 24),
+                SetScoreInput(
+                    firstPlayer: widget.firstPlayer,
+                    secondPlayer: widget.secondPlayer,
+                    setNumber: 2,
+                    addSet: _addSet),
+              ],
+              if (_sets.length >= 2 && _matchInThreeSets) ...[
+                const SizedBox(height: 24),
+                SetScoreInput(
+                    firstPlayer: widget.firstPlayer,
+                    secondPlayer: widget.secondPlayer,
+                    setNumber: 3,
+                    addSet: _addSet),
+              ],
               const SizedBox(height: 16),
             ],
           ),

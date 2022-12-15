@@ -6,7 +6,8 @@ class Player {
 
   int? rank;
   int? elo;
-  int? winrate;
+  int? gameCount;
+  int? gameWonCount;
 
   Player(
       {this.id,
@@ -15,7 +16,8 @@ class Player {
       required this.profilePictureUrl,
       this.rank,
       this.elo,
-      this.winrate});
+      this.gameCount,
+      this.gameWonCount});
 
   factory Player.fromJson(Map<String, dynamic> json, String id) {
     return Player(
@@ -25,7 +27,8 @@ class Player {
       profilePictureUrl: json['profilePictureUrl'],
       rank: json['rank'],
       elo: json['elo'],
-      winrate: json['winrate'],
+      gameCount: json['gameCount'],
+      gameWonCount: json['gameWonCount'],
     );
   }
 
@@ -35,8 +38,9 @@ class Player {
       'lastName': lastName,
       'profilePictureUrl': profilePictureUrl,
       'rank': rank ?? 0,
-      'elo': elo ?? 0,
-      'winrate': winrate ?? 0,
+      'elo': elo ?? 1000,
+      'gameCount': gameCount ?? 0,
+      'gameWonCount': gameWonCount ?? 0,
     };
   }
 }

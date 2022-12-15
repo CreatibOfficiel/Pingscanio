@@ -56,7 +56,7 @@ class MatchResultLine extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              nbOfSets == 2 ? '0-2' : '1-3',
+              nbOfSets == 2 ? '0-2' : '1-2',
               style: ThemeText.scoreTextBold.copyWith(
                 color: ThemeColor.neutralColor_100,
               ),

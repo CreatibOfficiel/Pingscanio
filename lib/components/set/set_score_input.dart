@@ -39,7 +39,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
         // calcul the difference between the two scores
         int difference = int.parse(_setScoreOfFirstPlayer.text) -
             int.parse(_setScoreOfSecondPlayer.text);
-
+        
         // if the difference is >= 2, the first player wins the set
         if (difference >= 2) {
           createSet(widget.firstPlayer);

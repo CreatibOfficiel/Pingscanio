@@ -63,6 +63,7 @@ class CheckableLinePlayer extends StatelessWidget {
             CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(player.profilePictureUrl),
+              backgroundColor: ThemeColor.neutralColor_700,
             ),
             const SizedBox(width: 8),
             Text(
