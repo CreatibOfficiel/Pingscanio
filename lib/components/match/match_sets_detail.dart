@@ -1,3 +1,5 @@
+MatchSetsDetail
+
 import 'package:flutter/material.dart';
 import 'package:pingscanio/objects/match_set.dart';
 import 'package:pingscanio/objects/player.dart';

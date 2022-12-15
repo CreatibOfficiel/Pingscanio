@@ -1,3 +1,5 @@
+Checkable Line Player
+
 import 'package:flutter/material.dart';
 import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';

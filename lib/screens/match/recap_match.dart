@@ -1,6 +1,9 @@
+Recap Match
+
 import 'package:flutter/material.dart';
 import 'package:pingscanio/components/match/match_result_line.dart';
 import 'package:pingscanio/components/match/match_sets_detail.dart';
+import 'package:pingscanio/components/player/elo_update_line_player.dart';
 import 'package:pingscanio/objects/match_set.dart';
 import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
@@ -88,12 +91,8 @@ class _RecapMatchState extends State<RecapMatch> {
                     MatchSetsDetail(
                         sets: widget.sets, winner: _winner, loser: _loser),
                     const SizedBox(height: 16),
-                    Text(
-                      "Élo",
-                      style: ThemeText.textHeading.copyWith(
-                        color: ThemeColor.neutralColor_300,
-                      ),
-                    ),
+                    EloUpdateLinePlayer(winner: _winner, loser: _loser),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

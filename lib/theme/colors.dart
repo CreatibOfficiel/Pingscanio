@@ -1,3 +1,5 @@
+Colors
+
 import 'package:flutter/material.dart';
 
 // create a class with all the colors used in the app
@@ -22,4 +24,8 @@ class ThemeColor {
 
   static const primaryColor_500 = Color(0xFF40E4E4);
   static const primaryColor_900 = Color(0xFF104040);
+
+  static const successColor_500 = Color(0xFF379A57);
+  static const errorColor_500 = Color(0xFFE9393F);
 }
+
