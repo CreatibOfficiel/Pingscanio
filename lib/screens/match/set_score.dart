@@ -44,18 +44,18 @@ class _SetScoreState extends State<SetScore> {
       return false;
     }
 
-    if (_sets.length == 3 && _sets[0].winner != _sets[1].winner) {
+    if (_sets.length == 3 && _sets[0].winnerId != _sets[1].winnerId) {
       // victory in 3 sets
       return true;
-    } else if (_sets.length == 2 && _sets[0].winner == _sets[1].winner) {
+    } else if (_sets.length == 2 && _sets[0].winnerId == _sets[1].winnerId) {
       // victory in 2 sets
       return true;
-    } else if (_sets.length == 3 && _sets[0].winner == _sets[1].winner) {
+    } else if (_sets.length == 3 && _sets[0].winnerId == _sets[1].winnerId) {
       // victory in 2 sets, too many sets so remove last one
       _sets.removeLast();
       _matchInThreeSets = false;
       return true;
-    } else if (_sets.length == 2 && _sets[0].winner != _sets[1].winner) {
+    } else if (_sets.length == 2 && _sets[0].winnerId != _sets[1].winnerId) {
       // victory in 3 sets, not enough sets
       _matchInThreeSets = true;
       return false;

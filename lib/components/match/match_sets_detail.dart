@@ -58,14 +58,14 @@ class MatchSetsDetail extends StatelessWidget {
                     const SizedBox(height: 32),
                     Text(sets[0].winnerScore.toString(),
                         style: ThemeText.textRegular.copyWith(
-                          color: sets[0].winner == winner
+                          color: sets[0].winnerId == winner.id
                               ? ThemeColor.neutralColor_400
                               : ThemeColor.neutralColor_600,
                         )),
                     const SizedBox(height: 16),
                     Text(sets[0].loserScore.toString(),
                         style: ThemeText.textRegular.copyWith(
-                          color: sets[0].winner == loser
+                          color: sets[0].winnerId == loser.id
                               ? ThemeColor.neutralColor_400
                               : ThemeColor.neutralColor_600,
                         )),
@@ -82,14 +82,14 @@ class MatchSetsDetail extends StatelessWidget {
                     const SizedBox(height: 32),
                     Text(sets[1].winnerScore.toString(),
                         style: ThemeText.textRegular.copyWith(
-                          color: sets[1].winner == winner
+                          color: sets[1].winnerId == winner.id
                               ? ThemeColor.neutralColor_400
                               : ThemeColor.neutralColor_600,
                         )),
                     const SizedBox(height: 16),
                     Text(sets[1].loserScore.toString(),
                         style: ThemeText.textRegular.copyWith(
-                          color: sets[1].winner == loser
+                          color: sets[1].winnerId == loser.id
                               ? ThemeColor.neutralColor_400
                               : ThemeColor.neutralColor_600,
                         )),
@@ -107,14 +107,14 @@ class MatchSetsDetail extends StatelessWidget {
                       const SizedBox(height: 32),
                       Text(sets[2].winnerScore.toString(),
                           style: ThemeText.textRegular.copyWith(
-                            color: sets[2].winner == winner
+                            color: sets[2].winnerId == winner.id
                                 ? ThemeColor.neutralColor_400
                                 : ThemeColor.neutralColor_600,
                           )),
                       const SizedBox(height: 16),
                       Text(sets[2].loserScore.toString(),
                           style: ThemeText.textRegular.copyWith(
-                            color: sets[2].winner == loser
+                            color: sets[2].winnerId == loser.id
                                 ? ThemeColor.neutralColor_400
                                 : ThemeColor.neutralColor_600,
                           )),

@@ -1,16 +1,14 @@
-import 'package:pingscanio/objects/player.dart';
-
 class MatchSet {
   final int setNumber;
   final int winnerScore;
   final int loserScore;
-  final Player winner;
+  final String winnerId;
 
   MatchSet({
     required this.setNumber,
     required this.winnerScore,
     required this.loserScore,
-    required this.winner,
+    required this.winnerId,
   });
 
   factory MatchSet.fromJson(Map<String, dynamic> json) {
@@ -18,7 +16,7 @@ class MatchSet {
       setNumber: json['setNumber'],
       winnerScore: json['winnerScore'],
       loserScore: json['loserScore'],
-      winner: Player.fromJson(json['winner'], json['winnerId']),
+      winnerId: json['winnerId'],
     );
   }
 
@@ -27,7 +25,7 @@ class MatchSet {
       'setNumber': setNumber,
       'winnerScore': winnerScore,
       'loserScore': loserScore,
-      'winner': winner.toJson(),
+      'winnerId': winnerId,
     };
   }
 }

@@ -44,7 +44,7 @@ class MatchResultLine extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '#${loser.rank}',
+              loser.rank == 0 ? 'N/A' : '#${loser.rank}',
               style: ThemeText.textRegular.copyWith(
                 color: ThemeColor.neutralColor_300,
               ),
@@ -87,7 +87,7 @@ class MatchResultLine extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '#${winner.rank}',
+              winner.rank == 0 ? 'N/A' : '#${winner.rank}',
               style: ThemeText.textRegular.copyWith(
                 color: ThemeColor.neutralColor_300,
               ),

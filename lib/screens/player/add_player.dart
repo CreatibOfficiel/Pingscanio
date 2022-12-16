@@ -64,11 +64,18 @@ class _AddPlayerState extends State<AddPlayer> {
       widget.refreshPlayers();
     }
 
-    SnackBar snackBar = const SnackBar(
-      content: Text('Joueur·euse ajouté·e'),
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Joueur·euse ajouté·e.",
+          style: ThemeText.textRegular.copyWith(
+            color: ThemeColor.neutralColor_100,
+          ),
+        ),
+        backgroundColor: ThemeColor.neutralColor_800,
+      ),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
     Navigator.pop(context);
   }
 

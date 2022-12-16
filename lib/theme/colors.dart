@@ -25,5 +25,8 @@ class ThemeColor {
 
   static const successColor_500 = Color(0xFF379A57);
   static const errorColor_500 = Color(0xFFE9393F);
-}
 
+  static const goldColor = Color(0xFFEBAA1E);
+  static const silverColor = Color(0xFFEBF2FA);
+  static const bronzeColor = Color(0xFFC68C3E);
+}

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pingscanio/components/button/round_back_button.dart';
+import 'package:pingscanio/components/button/round_button.dart';
 import 'package:pingscanio/components/match/match_result_line.dart';
 import 'package:pingscanio/components/match/match_sets_detail.dart';
 import 'package:pingscanio/components/player/elo_update_line_player.dart';
+import 'package:pingscanio/database/services/elo_service.dart';
+import 'package:pingscanio/database/services/match_service.dart';
+import 'package:pingscanio/database/services/player_service.dart';
+import 'package:pingscanio/objects/match_game.dart';
 import 'package:pingscanio/objects/match_set.dart';
 import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
@@ -32,7 +38,7 @@ class _RecapMatchState extends State<RecapMatch> {
     int firstPlayerScore = 0;
     int secondPlayerScore = 0;
     for (MatchSet matchSet in widget.sets) {
-      if (matchSet.winner == widget.firstPlayer) {
+      if (matchSet.winnerId == widget.firstPlayer.id) {
         firstPlayerScore++;
       } else {
         secondPlayerScore++;
@@ -49,6 +55,30 @@ class _RecapMatchState extends State<RecapMatch> {
     setState(() {
       isLoaded = true;
     });
+  }
+
+  void _createMatch() {
+    MatchGame matchGame = MatchGame(
+      winnerId: _winner.id!,
+      loserId: _loser.id!,
+      matchSets: widget.sets,
+      date: DateTime.now(),
+    );
+
+    MatchService().createMatch(matchGame);
+    _winner.elo = EloService().calculateElo(_loser.elo!, _winner.elo!, true);
+    _loser.elo = EloService().calculateElo(_winner.elo!, _loser.elo!, false);
+
+    _winner.gameCount = _winner.gameCount! + 1;
+    _winner.gameWonCount = _winner.gameWonCount! + 1;
+
+    _loser.gameCount = _loser.gameCount! + 1;
+
+    PlayerService().updatePlayer(_winner);
+    PlayerService().updatePlayer(_loser);
+
+    // close all the screens and go back to the home screen
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 
   @override
@@ -100,6 +130,24 @@ class _RecapMatchState extends State<RecapMatch> {
                 color: ThemeColor.primaryColor,
               ),
             ),
+      bottomNavigationBar: BottomAppBar(
+          color: ThemeColor.primaryColor,
+          child: Container(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            height: 96,
+            child: Row(children: [
+              const Expanded(
+                child: RoundBackButton(
+                  text: "Précédent",
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: RoundButton(
+                    text: "Valider", enabled: true, onPressed: _createMatch),
+              ),
+            ]),
+          )),
     );
   }
 }

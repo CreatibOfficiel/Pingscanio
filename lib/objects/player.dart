@@ -43,4 +43,15 @@ class Player {
       'gameWonCount': gameWonCount ?? 0,
     };
   }
+
+  String get fullName => '$firstName $lastName';
+
+  // calcul the winrate of the player in percent and return it in a string
+  String get winrate {
+    if (gameCount == 0) {
+      return '0';
+    } else {
+      return ((gameWonCount! / gameCount!) * 100).toStringAsFixed(0);
+    }
+  }
 }

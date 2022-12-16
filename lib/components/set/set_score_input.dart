@@ -33,19 +33,34 @@ class _SetScoreInputState extends State<SetScoreInput> {
     // check if both text fields are filled
     if (_setScoreOfFirstPlayer.text.isNotEmpty &&
         _setScoreOfSecondPlayer.text.isNotEmpty) {
+      int scoreOfFirstPlayer = int.parse(_setScoreOfFirstPlayer.text);
+      int scoreOfSecondPlayer = int.parse(_setScoreOfSecondPlayer.text);
+
       // check if one of the two scores is >= 11
-      if (int.parse(_setScoreOfFirstPlayer.text) >= 11 ||
-          int.parse(_setScoreOfSecondPlayer.text) >= 11) {
-        // calcul the difference between the two scores
-        int difference = int.parse(_setScoreOfFirstPlayer.text) -
-            int.parse(_setScoreOfSecondPlayer.text);
-        
-        // if the difference is >= 2, the first player wins the set
-        if (difference >= 2) {
-          createSet(widget.firstPlayer);
-        } else if (difference <= -2) {
-          createSet(widget.secondPlayer);
+      if (scoreOfFirstPlayer >= 11 || scoreOfSecondPlayer >= 11) {
+        // check if the two scores are > 10
+        if (scoreOfFirstPlayer > 10 && scoreOfSecondPlayer > 10) {
+          // check if the difference between the two scores is != 2, if so, return
+          if ((scoreOfFirstPlayer - scoreOfSecondPlayer).abs() != 2) {
+            // show scaffold message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "La différence entre les scores doit être de 2.",
+                  style: ThemeText.textRegular.copyWith(
+                    color: ThemeColor.neutralColor_100,
+                  ),
+                ),
+                backgroundColor: ThemeColor.neutralColor_800,
+              ),
+            );
+            return;
+          }
         }
+
+        createSet(scoreOfFirstPlayer > scoreOfSecondPlayer
+            ? widget.firstPlayer
+            : widget.secondPlayer);
       }
     }
   }
@@ -57,7 +72,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
       setNumber: widget.setNumber,
       winnerScore: int.parse(_setScoreOfFirstPlayer.text),
       loserScore: int.parse(_setScoreOfSecondPlayer.text),
-      winner: winner,
+      winnerId: winner.id!,
     );
 
     widget.addSet(matchSet, widget.setNumber);
@@ -101,6 +116,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
               child: TextFormField(
                 onChanged: _onTextChanged,
                 controller: _setScoreOfFirstPlayer,
+                enableInteractiveSelection: false,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(2),
@@ -172,6 +188,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
               child: TextFormField(
                 onChanged: _onTextChanged,
                 controller: _setScoreOfSecondPlayer,
+                enableInteractiveSelection: false,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(2),
