@@ -31,14 +31,21 @@ class PlayerRepository {
         .toList(growable: false));
   }
 
-  Future<Player> getPlayer(Player player) {
+  Future<List<Player>> getPlayersSortedByElo() {
     return _firestore
         .collection('players')
-        .where('firstName', isEqualTo: player.firstName)
-        .where('lastName', isEqualTo: player.lastName)
-        .where('profilePictureUrl', isEqualTo: player.profilePictureUrl)
+        .orderBy('elo', descending: true)
         .get()
-        .then(
-            (value) => Player.fromJson(value.docs[0].data(), value.docs[0].id));
+        .then((value) => value.docs
+            .map((e) => Player.fromJson(e.data(), e.id))
+            .toList(growable: false));
+  }
+
+  Future<Player> getPlayerById(String id) {
+    return _firestore
+        .collection('players')
+        .doc(id)
+        .get()
+        .then((value) => Player.fromJson(value.data()!, value.id));
   }
 }

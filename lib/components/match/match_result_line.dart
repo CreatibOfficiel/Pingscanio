@@ -37,7 +37,7 @@ class MatchResultLine extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${loser.firstName} ${loser.lastName.substring(0, 2)}.',
+              loser.fullName,
               style: ThemeText.textBold.copyWith(
                 color: ThemeColor.neutralColor_100,
               ),
@@ -80,7 +80,7 @@ class MatchResultLine extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '${winner.firstName} ${winner.lastName.substring(0, 2)}.',
+              winner.fullName,
               style: ThemeText.textBold.copyWith(
                 color: ThemeColor.neutralColor_100,
               ),

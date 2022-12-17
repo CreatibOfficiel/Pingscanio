@@ -103,7 +103,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '${widget.firstPlayer.firstName} ${widget.firstPlayer.lastName.substring(0, 2)}.',
+                  widget.firstPlayer.fullName,
                   style: ThemeText.textRegular.copyWith(
                     color: ThemeColor.neutralColor_300,
                   ),
@@ -175,7 +175,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '${widget.secondPlayer.firstName} ${widget.secondPlayer.lastName.substring(0, 2)}.',
+                  widget.secondPlayer.fullName,
                   style: ThemeText.textRegular.copyWith(
                     color: ThemeColor.neutralColor_300,
                   ),

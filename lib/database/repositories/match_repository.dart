@@ -22,16 +22,22 @@ class MatchRepository {
         .toList(growable: false));
   }
 
-  Future<MatchGame> getMatch(MatchGame match) {
+  Future<List<MatchGame>> getRecentMatches() {
     return _firestore
         .collection('matches')
-        .where('winnerId', isEqualTo: match.winnerId)
-        .where('loserId', isEqualTo: match.loserId)
-        .where('matchSets', isEqualTo: match.matchSets)
-        .where('date', isEqualTo: match.date)
-        .where('winnerId', isEqualTo: match.winnerId)
+        .orderBy('date', descending: true)
+        .limit(8)
         .get()
-        .then((value) =>
-            MatchGame.fromJson(value.docs[0].data(), value.docs[0].id));
+        .then((value) => value.docs
+            .map((e) => MatchGame.fromJson(e.data(), e.id))
+            .toList(growable: false));
+  }
+
+  Future<MatchGame> getMatchById(String id) {
+    return _firestore
+        .collection('matches')
+        .doc(id)
+        .get()
+        .then((value) => MatchGame.fromJson(value.data()!, value.id));
   }
 }

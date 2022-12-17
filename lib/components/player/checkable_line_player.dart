@@ -67,7 +67,7 @@ class CheckableLinePlayer extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${player.firstName} ${player.lastName.substring(0, 2)}.',
+              player.fullName,
               style: ThemeText.textRegular.copyWith(
                 color: ThemeColor.neutralColor_300,
               ),

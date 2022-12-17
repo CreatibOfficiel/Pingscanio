@@ -35,12 +35,12 @@ class MatchSetsDetail extends StatelessWidget {
                       color: ThemeColor.neutralColor_300,
                     )),
                 const SizedBox(height: 32),
-                Text('${winner.firstName} ${winner.lastName.substring(0, 2)}.',
+                Text(winner.fullName,
                     style: ThemeText.textRegular.copyWith(
                       color: ThemeColor.neutralColor_100,
                     )),
                 const SizedBox(height: 16),
-                Text('${loser.firstName} ${loser.lastName.substring(0, 2)}.',
+                Text(loser.fullName,
                     style: ThemeText.textRegular.copyWith(
                       color: ThemeColor.neutralColor_100,
                     )),

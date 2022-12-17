@@ -77,8 +77,8 @@ class _RecapMatchState extends State<RecapMatch> {
     PlayerService().updatePlayer(_winner);
     PlayerService().updatePlayer(_loser);
 
-    // close all the screens and go back to the home screen
-    Navigator.popUntil(context, (route) => route.isFirst);
+    // refresh the home screen
+    Navigator.pushReplacementNamed(context, "/");
   }
 
   @override

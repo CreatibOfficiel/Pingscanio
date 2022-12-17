@@ -17,11 +17,8 @@ abstract class ThemeText {
   static const TextStyle textBold = TextStyle(
       fontFamily: 'TT Smalls', fontSize: 15, fontWeight: FontWeight.w700);
 
-  static const TextStyle textRegular = TextStyle(
-      fontFamily: 'Inter',
-      fontSize: 15,
-      height: 1.6,
-      fontWeight: FontWeight.w400);
+  static const TextStyle textRegular =
+      TextStyle(fontFamily: 'Inter', fontSize: 15, fontWeight: FontWeight.w400);
 
   static const TextStyle textCaption = TextStyle(
       fontFamily: 'Inter',

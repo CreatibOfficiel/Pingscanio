@@ -20,7 +20,11 @@ class MatchService {
     return await _matchRepository.deleteMatch(match);
   }
 
-  Future<MatchGame> getMatch(MatchGame match) async {
-    return await _matchRepository.getMatch(match);
+  Future<MatchGame> getMatchById(String id) async {
+    return await _matchRepository.getMatchById(id);
+  }
+
+  Future<List<MatchGame>> getRecentMatches() async {
+    return await _matchRepository.getRecentMatches();
   }
 }

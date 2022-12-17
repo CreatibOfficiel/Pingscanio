@@ -45,8 +45,7 @@ class EloUpdateLinePlayer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                          '${winner.firstName} ${winner.lastName.substring(0, 2)}.',
+                      Text(winner.fullName,
                           style: ThemeText.textRegular.copyWith(
                             color: ThemeColor.neutralColor_100,
                           )),
@@ -114,8 +113,7 @@ class EloUpdateLinePlayer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                          '${loser.firstName} ${loser.lastName.substring(0, 2)}.',
+                      Text(loser.fullName,
                           style: ThemeText.textRegular.copyWith(
                             color: ThemeColor.neutralColor_100,
                           )),
