@@ -19,7 +19,17 @@ class _RankingState extends State<Ranking> {
   bool isLoaded = false;
 
   void getPlayers() async {
-    players = await PlayerService().getPlayersSortedByElo();
+    players = await PlayerService().getActivesPlayers();
+
+    if (players.isEmpty) {
+      setState(() {
+        isLoaded = true;
+      });
+      return;
+    }
+
+    // sort players by elo
+    players.sort((a, b) => b.elo!.compareTo(a.elo!));
 
     for (Player player in players) {
       if (bestPlayers.length < 3) {
@@ -58,7 +68,18 @@ class _RankingState extends State<Ranking> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ScrollablePodium(bestPlayers: bestPlayers),
+                    if (bestPlayers.isNotEmpty) ...[
+                      ScrollablePodium(bestPlayers: bestPlayers),
+                    ] else ...[
+                      Center(
+                        child: Text(
+                          "Aucun joueur n'a encore joué",
+                          style: ThemeText.textTitle.copyWith(
+                            color: ThemeColor.neutralColor_100,
+                          ),
+                        ),
+                      ),
+                    ],
                     if (players.length > 3) ...[
                       const SizedBox(height: 16),
                       MediaQuery.removePadding(

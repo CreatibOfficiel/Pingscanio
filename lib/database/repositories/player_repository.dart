@@ -32,14 +32,15 @@ class PlayerRepository {
             .toList(growable: false));
   }
 
-  Future<List<Player>> getPlayersSortedByElo() {
+  Future<List<Player>> getActivesPlayers() {
     return _firestore
         .collection('players')
-        .orderBy('elo', descending: true)
+        .where('gameCount', isGreaterThan: 0)
         .get()
         .then((value) => value.docs
             .map((e) => Player.fromJson(e.data(), e.id))
             .toList(growable: false));
+
   }
 
   Future<Player> getPlayerById(String id) {

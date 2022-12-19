@@ -46,8 +46,7 @@ class _MatchesState extends State<Matches> {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    if (matches.length > 3) ...[
-                      const SizedBox(height: 16),
+                    if (matches.length > 1) ...[
                       MediaQuery.removePadding(
                         context: context,
                         removeTop: true,
