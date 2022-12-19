@@ -26,8 +26,8 @@ class SetScoreInput extends StatefulWidget {
 }
 
 class _SetScoreInputState extends State<SetScoreInput> {
-  final TextEditingController _setScoreOfFirstPlayer = TextEditingController();
-  final TextEditingController _setScoreOfSecondPlayer = TextEditingController();
+  final TextEditingController _setScoreOfFirstPlayer = TextEditingController(text: '0');
+  final TextEditingController _setScoreOfSecondPlayer = TextEditingController(text: '0');
 
   void _onTextChanged(String text) {
     // check if both text fields are filled

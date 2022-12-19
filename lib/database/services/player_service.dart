@@ -27,4 +27,8 @@ class PlayerService {
   Future<Player> getPlayerById(String id) async {
     return await _playerRepository.getPlayerById(id);
   }
+
+  Future<void> updateAllPlayersRanking() async {
+    await _playerRepository.updateAllPlayersRanking();
+  }
 }

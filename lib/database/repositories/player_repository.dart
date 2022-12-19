@@ -40,7 +40,6 @@ class PlayerRepository {
         .then((value) => value.docs
             .map((e) => Player.fromJson(e.data(), e.id))
             .toList(growable: false));
-
   }
 
   Future<Player> getPlayerById(String id) {
@@ -49,5 +48,14 @@ class PlayerRepository {
         .doc(id)
         .get()
         .then((value) => Player.fromJson(value.data()!, value.id));
+  }
+
+  Future<void> updateAllPlayersRanking() async {
+    List<Player> players = await getActivesPlayers();
+    players.sort((a, b) => b.elo!.compareTo(a.elo!));
+    for (int i = 0; i < players.length; i++) {
+      players[i].rank = i + 1;
+      await updatePlayer(players[i]);
+    }
   }
 }

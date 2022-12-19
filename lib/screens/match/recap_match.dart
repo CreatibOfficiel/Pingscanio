@@ -77,8 +77,11 @@ class _RecapMatchState extends State<RecapMatch> {
     PlayerService().updatePlayer(_winner);
     PlayerService().updatePlayer(_loser);
 
-    // refresh the home screen
-    Navigator.pushReplacementNamed(context, "/");
+    PlayerService().updateAllPlayersRanking();
+
+    // refresh the home screen using push and remove until
+    Navigator.pushNamedAndRemoveUntil(
+        context, "/", (Route<dynamic> route) => false);
   }
 
   @override
