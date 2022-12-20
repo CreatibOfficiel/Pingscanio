@@ -50,12 +50,21 @@ class PlayerRepository {
         .then((value) => Player.fromJson(value.data()!, value.id));
   }
 
-  Future<void> updateAllPlayersRanking() async {
+  Future<List<Player>> getRankedPlayers() async {
     List<Player> players = await getActivesPlayers();
     players.sort((a, b) => b.elo!.compareTo(a.elo!));
+    // check rank of players, if same elo, same rank, and if rank is not the same as bdd, update it
+    int rank = 1;
     for (int i = 0; i < players.length; i++) {
-      players[i].rank = i + 1;
-      await updatePlayer(players[i]);
+      if (i > 0 && players[i].elo != players[i - 1].elo) {
+        rank++;
+      }
+      if (players[i].rank != rank) {
+        players[i].rank = rank;
+        updatePlayer(players[i]);
+      }
     }
+    players.sort((a, b) => a.rank!.compareTo(b.rank!));
+    return players;
   }
 }

@@ -44,7 +44,13 @@ class Player {
     };
   }
 
-  String get fullName => '$firstName ${lastName.substring(0, 2)}.';
+  String get fullName {
+    if (lastName.length <= 2) {
+      return '$firstName $lastName';
+    }
+    return '$firstName ${lastName.substring(0, 2)}.';
+  }
+
 
   // calcul the winrate of the player in percent and return it in a string
   String get winrate {

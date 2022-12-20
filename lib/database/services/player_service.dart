@@ -20,15 +20,11 @@ class PlayerService {
     return await _playerRepository.getPlayers();
   }
 
-  Future<List<Player>> getActivesPlayers() async {
-    return await _playerRepository.getActivesPlayers();
-  }
-
   Future<Player> getPlayerById(String id) async {
     return await _playerRepository.getPlayerById(id);
   }
 
-  Future<void> updateAllPlayersRanking() async {
-    await _playerRepository.updateAllPlayersRanking();
+  Future<List<Player>> getRankedPlayers() async {
+    return await _playerRepository.getRankedPlayers();
   }
 }

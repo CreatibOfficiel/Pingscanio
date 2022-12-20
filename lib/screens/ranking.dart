@@ -19,7 +19,7 @@ class _RankingState extends State<Ranking> {
   bool isLoaded = false;
 
   void getPlayers() async {
-    players = await PlayerService().getActivesPlayers();
+    players = await PlayerService().getRankedPlayers();
 
     if (players.isEmpty) {
       setState(() {
@@ -27,9 +27,6 @@ class _RankingState extends State<Ranking> {
       });
       return;
     }
-
-    // sort players by elo
-    players.sort((a, b) => b.elo!.compareTo(a.elo!));
 
     for (Player player in players) {
       if (bestPlayers.length < 3) {
