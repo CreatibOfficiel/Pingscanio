@@ -29,4 +29,6 @@ class ThemeColor {
   static const goldColor = Color(0xFFEBAA1E);
   static const silverColor = Color(0xFFEBF2FA);
   static const bronzeColor = Color(0xFFC68C3E);
+
+  static const closeButton = Color(0xFF7C7C8E);
 }

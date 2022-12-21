@@ -52,7 +52,7 @@ class _RankingState extends State<Ranking> {
     return Scaffold(
       body: isLoaded
           ? Container(
-              margin: const EdgeInsets.only(left: 16, right: 16),
+              margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
               child: SingleChildScrollView(
                 physics: const ScrollPhysics(),
                 child: Column(
@@ -71,7 +71,7 @@ class _RankingState extends State<Ranking> {
                       Center(
                         child: Text(
                           "Aucun joueur n'a encore joué",
-                          style: ThemeText.textTitle.copyWith(
+                          style: ThemeText.textRegular.copyWith(
                             color: ThemeColor.neutralColor_100,
                           ),
                         ),

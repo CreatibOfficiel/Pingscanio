@@ -93,7 +93,7 @@ class _RecapMatchState extends State<RecapMatch> {
     return Scaffold(
       body: isLoaded
           ? Container(
-              margin: const EdgeInsets.only(left: 16, right: 16),
+              margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

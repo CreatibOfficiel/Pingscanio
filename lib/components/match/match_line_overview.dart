@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pingscanio/components/modal/match_detail_modal.dart';
 import 'package:pingscanio/database/services/player_service.dart';
 import 'package:pingscanio/objects/match_game.dart';
 import 'package:pingscanio/theme/colors.dart';
@@ -174,15 +175,23 @@ class _MatchLineOverviewState extends State<MatchLineOverview> {
               ),
             ),
             onTap: () {
-              /* Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MatchDetail(match: widget.match),
-              ),
-            ); */
-              print("MatchLineOverview: ${widget.match.id}");
+              _matchDetailModal(context);
             },
           )
         : Container();
+  }
+  
+  void _matchDetailModal(BuildContext context) {
+    showModalBottomSheet(context: context, shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ), backgroundColor: ThemeColor.neutralColor_900, builder: (BuildContext bc) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: MatchDetailModal(match: widget.match),
+      );
+    });
   }
 }

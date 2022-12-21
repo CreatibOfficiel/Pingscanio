@@ -4,7 +4,6 @@ abstract class ThemeText {
   static const TextStyle textTitle = TextStyle(
       fontFamily: 'TT Smalls',
       fontSize: 32,
-      height: 4,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w800);
 

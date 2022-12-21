@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pingscanio/components/modal/player_detail_modal.dart';
 import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
@@ -11,7 +12,9 @@ class RankedLinePlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        _playerDetailModal(context);
+      },
       child: Container(
         height: 56,
         margin: const EdgeInsets.only(bottom: 8),
@@ -93,5 +96,19 @@ class RankedLinePlayer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _playerDetailModal(BuildContext context) {
+    showModalBottomSheet(context: context, shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ), backgroundColor: ThemeColor.neutralColor_900, builder: (BuildContext bc) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: PlayerDetailModal(player: player),
+      );
+    });
   }
 }

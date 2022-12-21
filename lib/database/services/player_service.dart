@@ -25,6 +25,20 @@ class PlayerService {
   }
 
   Future<List<Player>> getRankedPlayers() async {
-    return await _playerRepository.getRankedPlayers();
+    List<Player> players = await _playerRepository.getActivesPlayers();
+    players.sort((a, b) => b.elo!.compareTo(a.elo!));
+    // check rank of players, if same elo, same rank, and if rank is not the same as bdd, update it
+    int rank = 1;
+    for (int i = 0; i < players.length; i++) {
+      if (i > 0 && players[i].elo != players[i - 1].elo) {
+        rank++;
+      }
+      if (players[i].rank != rank) {
+        players[i].rank = rank;
+        updatePlayer(players[i]);
+      }
+    }
+    players.sort((a, b) => a.rank!.compareTo(b.rank!));
+    return players;
   }
 }

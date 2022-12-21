@@ -83,7 +83,7 @@ class _AddPlayerState extends State<AddPlayer> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          margin: const EdgeInsets.only(left: 16, right: 16),
+          margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
           child: ListView(
             children: [
               Text(

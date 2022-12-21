@@ -119,7 +119,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          margin: const EdgeInsets.only(left: 16, right: 16),
+          margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
           child: isLoaded
               ? SingleChildScrollView(
                   child: Column(

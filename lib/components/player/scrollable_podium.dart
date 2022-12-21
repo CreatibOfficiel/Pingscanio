@@ -155,16 +155,10 @@ class ScrollablePodium extends StatelessWidget {
                           color: _getBackgroundColor(index),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: IconButton(
-                          icon: Icon(
-                            _getIcon(index),
-                            color: _getIconColor(index),
-                            size: 16,
-                          ),
-                          onPressed: () {
-                            print(
-                                "TODO : savoir depuis combien de temps le joueur est à cette place");
-                          },
+                        child: Icon(
+                          _getIcon(index),
+                          color: _getIconColor(index),
+                          size: 16,
                         ),
                       ),
                     ),
