@@ -43,4 +43,16 @@ abstract class ThemeText {
       fontSize: 40,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w800);
+
+  static const TextStyle statisticText = TextStyle(
+      fontFamily: 'Inter',
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w700);
+
+  static const TextStyle statisticNameText = TextStyle(
+      fontFamily: 'Inter',
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400);
 }

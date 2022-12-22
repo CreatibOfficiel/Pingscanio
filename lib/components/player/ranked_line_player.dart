@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pingscanio/components/modal/player_detail_modal.dart';
+import 'package:pingscanio/screens/modal/player_detail_modal.dart';
 import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';

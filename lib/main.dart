@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pingscanio/home.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  initializeDateFormatting('fr_FR', null).then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

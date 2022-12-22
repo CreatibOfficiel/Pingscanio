@@ -45,7 +45,7 @@ class _MatchDetailModalState extends State<MatchDetailModal> {
   @override
   Widget build(BuildContext context) {
     return isLoaded ? Container(
-      margin: const EdgeInsets.all( 16),
+      margin: const EdgeInsets.all(16),
       child: ListView(
         children: [
           Row(
@@ -58,7 +58,9 @@ class _MatchDetailModalState extends State<MatchDetailModal> {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.close),
+                padding: const EdgeInsets.all(0),
+                constraints: const BoxConstraints(),
+                icon: const Icon(Icons.close, size: 24),
                 color: ThemeColor.closeButton,
                 onPressed: () {
                   Navigator.of(context).pop();

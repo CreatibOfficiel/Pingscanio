@@ -19,6 +19,7 @@ class MatchService {
     if (matchesOfPlayers.length > 3) {
       matchesOfPlayers = matchesOfPlayers.sublist(0, 3);
     }
+    matchesOfPlayers.sort((a, b) => b.date.compareTo(a.date));
     return matchesOfPlayers;
   }
 
@@ -37,4 +38,17 @@ class MatchService {
   Future<List<MatchGame>> getRecentMatches() async {
     return await _matchRepository.getRecentMatches();
   }
+
+  Future<List<MatchGame>> getMatchesOfPlayer(String playerId) async {
+    List<MatchGame> matches = await _matchRepository.getMatches();
+    List<MatchGame> matchesOfPlayer = matches.where((element) => 
+            element.winnerId == playerId || 
+            element.loserId == playerId).toList();
+    if (matchesOfPlayer.length > 3) {
+      matchesOfPlayer = matchesOfPlayer.sublist(0, 3);
+    }
+    matchesOfPlayer.sort((a, b) => b.date.compareTo(a.date));
+    return matchesOfPlayer;
+  }
+
 }

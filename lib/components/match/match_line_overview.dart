@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pingscanio/components/modal/match_detail_modal.dart';
+import 'package:pingscanio/screens/modal/match_detail_modal.dart';
 import 'package:pingscanio/database/services/player_service.dart';
 import 'package:pingscanio/objects/match_game.dart';
 import 'package:pingscanio/theme/colors.dart';
