@@ -28,7 +28,7 @@ class _PlayerDetailModalState extends State<PlayerDetailModal> {
   late final String lastMatchDate;
 
   void initData() async {
-    matches = await MatchService().getMatchesOfPlayer(player.id!);
+    matches = await MatchService().getRecentMatchesOfPlayer(player.id!);
 
     lastMatchDate = DateFormat('dd/MM/yyyy').format(matches[0].date);
 
@@ -239,7 +239,7 @@ class _PlayerDetailModalState extends State<PlayerDetailModal> {
           ),
           const SizedBox(height: 32),
           Text(
-            'Derniers matchs',
+            'Résultats récents',
             style: ThemeText.textHeading.copyWith(
               color: ThemeColor.neutralColor_50,
             ),
@@ -255,13 +255,13 @@ class _PlayerDetailModalState extends State<PlayerDetailModal> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: matches.length,
                 itemBuilder: (context, index) {
-                  return MatchLineOverview(match: matches[index]);
+                  return MatchLineOverview(match: matches[index], date: '');
                 },
               ),
             ),
           ] else ...[
             Text(
-              'Aucun match joué',
+              'Aucun match joué récemment',
               style: ThemeText.textRegular.copyWith(
                 color: ThemeColor.neutralColor_300,
               ),

@@ -15,8 +15,30 @@ class Matches extends StatefulWidget {
 class _MatchesState extends State<Matches> {
   List<MatchGame> matches = [];
   bool isLoaded = false;
+  late String lastMatchDate;
+
+
+  String dateToString(DateTime date) {
+    if (date.day == DateTime.now().day &&
+        date.month == DateTime.now().month &&
+        date.year == DateTime.now().year) {
+      return "Aujourd'hui";
+    }
+
+    return "${date.day}/${date.month}/${date.year}";
+  }
+
+  String getLastMatchDate(int index) {
+    if (lastMatchDate != dateToString(matches[index].date)) {
+      lastMatchDate = dateToString(matches[index].date);
+      return dateToString(matches[index].date);
+    } else {
+      return '';
+    }
+  }
 
   getMatches() async {
+    lastMatchDate = dateToString(DateTime.now());
     matches = await MatchService().getRecentMatches();
     setState(() {
       isLoaded = true;
@@ -45,8 +67,8 @@ class _MatchesState extends State<Matches> {
                         color: ThemeColor.neutralColor_100,
                       ),
                     ),
-                    const SizedBox(height: 32),
-                    if (matches.length > 1) ...[
+                    const SizedBox(height: 16),
+                    if (matches.isNotEmpty) ...[
                       MediaQuery.removePadding(
                         context: context,
                         removeTop: true,
@@ -56,7 +78,7 @@ class _MatchesState extends State<Matches> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: matches.length,
                             itemBuilder: (context, index) {
-                              return MatchLineOverview(match: matches[index]);
+                              return MatchLineOverview(match: matches[index], date: getLastMatchDate(index));
                             }),
                       ),
                       const SizedBox(height: 8),

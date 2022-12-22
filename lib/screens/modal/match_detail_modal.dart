@@ -75,7 +75,7 @@ class _MatchDetailModalState extends State<MatchDetailModal> {
             nbOfSets: match.matchSets.length,
           ),
           const SizedBox(height: 48),
-          MatchLineOverview(match: match),
+          MatchLineOverview(match: match, date: ''),
           const SizedBox(height: 16),
           Text('Historique des 3 derniers matchs',
             style: ThemeText.textHeading.copyWith(
@@ -93,7 +93,7 @@ class _MatchDetailModalState extends State<MatchDetailModal> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: matches.length,
                 itemBuilder: (context, index) {
-                  return MatchLineOverview(match: matches[index]);
+                  return MatchLineOverview(match: matches[index], date: '');
                 },
               ),
             ),

@@ -38,14 +38,12 @@ class MatchService {
     return await _matchRepository.getRecentMatches();
   }
 
-  Future<List<MatchGame>> getMatchesOfPlayer(String playerId) async {
+  Future<List<MatchGame>> getRecentMatchesOfPlayer(String playerId) async {
     List<MatchGame> matches = await _matchRepository.getMatches();
     List<MatchGame> matchesOfPlayer = matches.where((element) => 
-            element.winnerId == playerId || 
-            element.loserId == playerId).toList();
-    if (matchesOfPlayer.length > 3) {
-      matchesOfPlayer = matchesOfPlayer.sublist(0, 3);
-    }
+            (element.winnerId == playerId || 
+            element.loserId == playerId) &&
+            element.date.isAfter(DateTime.now().subtract(const Duration(days: 7)))).toList();
     return matchesOfPlayer;
   }
 

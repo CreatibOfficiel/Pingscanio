@@ -9,8 +9,9 @@ import '../../objects/player.dart';
 
 class MatchLineOverview extends StatefulWidget {
   MatchGame match;
+  String date;
 
-  MatchLineOverview({super.key, required this.match});
+  MatchLineOverview({super.key, required this.match, required this.date});
 
   @override
   State<MatchLineOverview> createState() => _MatchLineOverviewState();
@@ -39,145 +40,174 @@ class _MatchLineOverviewState extends State<MatchLineOverview> {
   @override
   Widget build(BuildContext context) {
     return isLoaded
-        ? InkWell(
-            child: Container(
-              height: 80,
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: ThemeColor.neutralColor_800,
-                borderRadius: BorderRadius.circular(12),
+        ? Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.date != '') ...[
+              const SizedBox(height: 16),
+              Text(widget.date,
+                style: ThemeText.textHeading.copyWith(
+                  color: ThemeColor.neutralColor_300,
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(winner.fullName,
-                            style: ThemeText.textBold.copyWith(
-                              color: ThemeColor.neutralColor_100,
-                            )),
-                        Text(loser.fullName,
-                            style: ThemeText.textRegular.copyWith(
-                              color: ThemeColor.neutralColor_400,
-                            )),
-                      ],
-                    ),
+              const SizedBox(height: 16),
+            ],
+              InkWell(
+                child: Container(
+                  height: 80,
+                  margin: const EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                    color: ThemeColor.neutralColor_800,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  Row(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(widget.match.matchSets[0].winnerScore.toString(),
-                              style: ThemeText.textRegular.copyWith(
-                                color: widget.match.matchSets[0].winnerId ==
-                                        winner.id
-                                    ? ThemeColor.neutralColor_400
-                                    : ThemeColor.neutralColor_600,
-                              )),
-                          Text(widget.match.matchSets[0].loserScore.toString(),
-                              style: ThemeText.textRegular.copyWith(
-                                color: widget.match.matchSets[0].winnerId ==
-                                        loser.id
-                                    ? ThemeColor.neutralColor_400
-                                    : ThemeColor.neutralColor_600,
-                              )),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(widget.match.matchSets[1].winnerScore.toString(),
-                              style: ThemeText.textRegular.copyWith(
-                                color: widget.match.matchSets[1].winnerId ==
-                                        winner.id
-                                    ? ThemeColor.neutralColor_400
-                                    : ThemeColor.neutralColor_600,
-                              )),
-                          Text(widget.match.matchSets[1].loserScore.toString(),
-                              style: ThemeText.textRegular.copyWith(
-                                color: widget.match.matchSets[1].winnerId ==
-                                        loser.id
-                                    ? ThemeColor.neutralColor_400
-                                    : ThemeColor.neutralColor_600,
-                              )),
-                        ],
-                      ),
-                      if (widget.match.matchSets.length == 3) ...[
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      Container(
+                        margin: const EdgeInsets.only(left: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                                widget.match.matchSets[2].winnerScore
-                                    .toString(),
-                                style: ThemeText.textRegular.copyWith(
-                                  color: widget.match.matchSets[2].winnerId ==
-                                          winner.id
-                                      ? ThemeColor.neutralColor_400
-                                      : ThemeColor.neutralColor_600,
+                            Text(winner.fullName,
+                                style: ThemeText.textBold.copyWith(
+                                  color: ThemeColor.neutralColor_100,
                                 )),
-                            Text(
-                                widget.match.matchSets[2].loserScore.toString(),
+                            Text(loser.fullName,
                                 style: ThemeText.textRegular.copyWith(
-                                  color: widget.match.matchSets[2].winnerId ==
-                                          loser.id
-                                      ? ThemeColor.neutralColor_400
-                                      : ThemeColor.neutralColor_600,
+                                  color: ThemeColor.neutralColor_400,
                                 )),
                           ],
                         ),
-                      ],
-                      const SizedBox(width: 10),
-                      Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              left: BorderSide(
-                                color: ThemeColor.neutralColor_700,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          child: Column(
+                      ),
+                      Row(
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text('2',
-                                  style: ThemeText.textBold.copyWith(
-                                    color: ThemeColor.neutralColor_50,
-                                  )),
-                              Container(
-                                height: 1,
-                                width: 40,
-                                color: ThemeColor.neutralColor_700,
-                              ),
                               Text(
-                                  widget.match.matchSets.length == 3
-                                      ? '1'
-                                      : '0',
+                                  widget.match.matchSets[0].winnerScore
+                                      .toString(),
                                   style: ThemeText.textRegular.copyWith(
-                                    color: ThemeColor.neutralColor_500,
+                                    color: widget.match.matchSets[0].winnerId ==
+                                            winner.id
+                                        ? ThemeColor.neutralColor_400
+                                        : ThemeColor.neutralColor_600,
+                                  )),
+                              Text(
+                                  widget.match.matchSets[0].loserScore
+                                      .toString(),
+                                  style: ThemeText.textRegular.copyWith(
+                                    color: widget.match.matchSets[0].winnerId ==
+                                            loser.id
+                                        ? ThemeColor.neutralColor_400
+                                        : ThemeColor.neutralColor_600,
                                   )),
                             ],
-                          )),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                  widget.match.matchSets[1].winnerScore
+                                      .toString(),
+                                  style: ThemeText.textRegular.copyWith(
+                                    color: widget.match.matchSets[1].winnerId ==
+                                            winner.id
+                                        ? ThemeColor.neutralColor_400
+                                        : ThemeColor.neutralColor_600,
+                                  )),
+                              Text(
+                                  widget.match.matchSets[1].loserScore
+                                      .toString(),
+                                  style: ThemeText.textRegular.copyWith(
+                                    color: widget.match.matchSets[1].winnerId ==
+                                            loser.id
+                                        ? ThemeColor.neutralColor_400
+                                        : ThemeColor.neutralColor_600,
+                                  )),
+                            ],
+                          ),
+                          if (widget.match.matchSets.length == 3) ...[
+                            const SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                    widget.match.matchSets[2].winnerScore
+                                        .toString(),
+                                    style: ThemeText.textRegular.copyWith(
+                                      color:
+                                          widget.match.matchSets[2].winnerId ==
+                                                  winner.id
+                                              ? ThemeColor.neutralColor_400
+                                              : ThemeColor.neutralColor_600,
+                                    )),
+                                Text(
+                                    widget.match.matchSets[2].loserScore
+                                        .toString(),
+                                    style: ThemeText.textRegular.copyWith(
+                                      color:
+                                          widget.match.matchSets[2].winnerId ==
+                                                  loser.id
+                                              ? ThemeColor.neutralColor_400
+                                              : ThemeColor.neutralColor_600,
+                                    )),
+                              ],
+                            ),
+                          ],
+                          const SizedBox(width: 10),
+                          Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    color: ThemeColor.neutralColor_700,
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text('2',
+                                      style: ThemeText.textBold.copyWith(
+                                        color: ThemeColor.neutralColor_50,
+                                      )),
+                                  Container(
+                                    height: 1,
+                                    width: 40,
+                                    color: ThemeColor.neutralColor_700,
+                                  ),
+                                  Text(
+                                      widget.match.matchSets.length == 3
+                                          ? '1'
+                                          : '0',
+                                      style: ThemeText.textRegular.copyWith(
+                                        color: ThemeColor.neutralColor_500,
+                                      )),
+                                ],
+                              )),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            onTap: () {
-              _matchDetailModal(context);
-            },
-          )
+                ),
+                onTap: () {
+                  _matchDetailModal(context);
+                },
+              )
+          ],
+        )
+        
+        
+
         : Container();
   }
   
