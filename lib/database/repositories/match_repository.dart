@@ -17,7 +17,9 @@ class MatchRepository {
   }
 
   Future<List<MatchGame>> getMatches() {
-    return _firestore.collection('matches').get().then((value) => value.docs
+    return _firestore.collection('matches')
+        .orderBy('date', descending: true)
+        .get().then((value) => value.docs
         .map((e) => MatchGame.fromJson(e.data(), e.id))
         .toList(growable: false));
   }

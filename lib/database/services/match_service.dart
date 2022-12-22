@@ -19,7 +19,6 @@ class MatchService {
     if (matchesOfPlayers.length > 3) {
       matchesOfPlayers = matchesOfPlayers.sublist(0, 3);
     }
-    matchesOfPlayers.sort((a, b) => b.date.compareTo(a.date));
     return matchesOfPlayers;
   }
 
@@ -47,7 +46,6 @@ class MatchService {
     if (matchesOfPlayer.length > 3) {
       matchesOfPlayer = matchesOfPlayer.sublist(0, 3);
     }
-    matchesOfPlayer.sort((a, b) => b.date.compareTo(a.date));
     return matchesOfPlayer;
   }
 
