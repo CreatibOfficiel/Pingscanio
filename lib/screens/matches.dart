@@ -15,31 +15,28 @@ class Matches extends StatefulWidget {
 class _MatchesState extends State<Matches> {
   List<MatchGame> matches = [];
   bool isLoaded = false;
-  late String lastMatchDate;
-
-
-  String dateToString(DateTime date) {
-    if (date.day == DateTime.now().day &&
-        date.month == DateTime.now().month &&
-        date.year == DateTime.now().year) {
-      return "Aujourd'hui";
-    }
-
-    return "${date.day}/${date.month}/${date.year}";
-  }
+  String lastMatchDate = '';
 
   String getLastMatchDate(int index) {
-    if (lastMatchDate != dateToString(matches[index].date)) {
-      lastMatchDate = dateToString(matches[index].date);
-      return dateToString(matches[index].date);
+    String matchDate = dateToString(matches[index].date);
+    if (matchDate != lastMatchDate) {
+      lastMatchDate = matchDate;
+      return matchDate;
     } else {
       return '';
     }
   }
 
+  String dateToString(DateTime date) {
+    if (date.day == DateTime.now().day && date.month == DateTime.now().month && date.year == DateTime.now().year) {
+      return 'Aujourd\'hui';
+    }
+    return '${date.day}/${date.month}/${date.year}';
+  }
+
   getMatches() async {
-    lastMatchDate = dateToString(DateTime.now());
     matches = await MatchService().getRecentMatches();
+
     setState(() {
       isLoaded = true;
     });

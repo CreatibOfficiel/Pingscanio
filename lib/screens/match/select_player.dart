@@ -249,9 +249,9 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                   CheckableLinePlayer(
                                       player: _players[index - 1],
                                       selectPlayer: selectPlayer,
-                                      isSelected: _players[index - 1] ==
-                                              firstPlayer ||
-                                          _players[index - 1] == secondPlayer),
+                                      isSelected: _players[index - 1].id ==
+                                              firstPlayer?.id ||
+                                          _players[index - 1].id == secondPlayer?.id),
                                   if (index == _players.length)
                                     const SizedBox(height: 16),
                                 ],

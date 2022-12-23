@@ -26,52 +26,69 @@ class SetScoreInput extends StatefulWidget {
 }
 
 class _SetScoreInputState extends State<SetScoreInput> {
-  final TextEditingController _setScoreOfFirstPlayer = TextEditingController();
-  final TextEditingController _setScoreOfSecondPlayer = TextEditingController();
+  final TextEditingController _setScoreOfFirstPlayer = TextEditingController(text: '0');
+  final TextEditingController _setScoreOfSecondPlayer = TextEditingController(text: '0');
+
+  void _firstInputOnTap() {
+    if (_setScoreOfFirstPlayer.text == '0') {
+      _setScoreOfFirstPlayer.text = '';
+    }
+  }
+
+  void _secondInputOnTap() {
+    if (_setScoreOfSecondPlayer.text == '0') {
+      _setScoreOfSecondPlayer.text = '';
+    }
+  }
 
   void _onTextChanged(String text) {
     // check if both text fields are filled
-    if (_setScoreOfFirstPlayer.text.isNotEmpty &&
-        _setScoreOfSecondPlayer.text.isNotEmpty) {
-      int scoreOfFirstPlayer = int.parse(_setScoreOfFirstPlayer.text);
-      int scoreOfSecondPlayer = int.parse(_setScoreOfSecondPlayer.text);
+    int scoreOfFirstPlayer = int.parse(
+        _setScoreOfFirstPlayer.text.isEmpty ? '0' : _setScoreOfFirstPlayer.text);
+    int scoreOfSecondPlayer = int.parse(
+        _setScoreOfSecondPlayer.text.isEmpty ? '0' : _setScoreOfSecondPlayer.text);
 
-      // check if one of the two scores is >= 11
-      if (scoreOfFirstPlayer >= 11 || scoreOfSecondPlayer >= 11) {
-        // check if the two scores are > 10
-        if (scoreOfFirstPlayer > 10 && scoreOfSecondPlayer > 10) {
-          // check if the difference between the two scores is != 2, if so, return
-          if ((scoreOfFirstPlayer - scoreOfSecondPlayer).abs() != 2) {
-            // show scaffold message
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  "La différence entre les scores doit être de 2.",
-                  style: ThemeText.textRegular.copyWith(
-                    color: ThemeColor.neutralColor_100,
-                  ),
+    // check if one of the two scores is >= 11
+    if (scoreOfFirstPlayer >= 11 || scoreOfSecondPlayer >= 11) {
+      // check if the two scores are > 10
+      if (scoreOfFirstPlayer > 10 && scoreOfSecondPlayer > 10) {
+        // check if the difference between the two scores is != 2, if so, return
+        if ((scoreOfFirstPlayer - scoreOfSecondPlayer).abs() != 2) {
+          // show scaffold message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                "La différence entre les scores doit être de 2.",
+                style: ThemeText.textRegular.copyWith(
+                  color: ThemeColor.neutralColor_100,
                 ),
-                backgroundColor: ThemeColor.neutralColor_800,
               ),
-            );
-            return;
-          }
+              backgroundColor: ThemeColor.neutralColor_800,
+            ),
+          );
+          return;
         }
+      } 
 
-        createSet(scoreOfFirstPlayer > scoreOfSecondPlayer
-            ? widget.firstPlayer
-            : widget.secondPlayer);
-      }
+      createSet(scoreOfFirstPlayer > scoreOfSecondPlayer
+          ? widget.firstPlayer
+          : widget.secondPlayer,
+          scoreOfFirstPlayer,
+          scoreOfSecondPlayer);
     }
   }
 
   // create MatchSet object
   // add MatchSet object to match
-  void createSet(Player winner) {
+  void createSet(Player winner, int scoreOfFirstPlayer, int scoreOfSecondPlayer) {
     MatchSet matchSet = MatchSet(
       setNumber: widget.setNumber,
-      winnerScore: int.parse(_setScoreOfFirstPlayer.text),
-      loserScore: int.parse(_setScoreOfSecondPlayer.text),
+      winnerScore: scoreOfFirstPlayer > scoreOfSecondPlayer
+          ? scoreOfFirstPlayer
+          : scoreOfSecondPlayer,
+      loserScore: scoreOfFirstPlayer > scoreOfSecondPlayer
+          ? scoreOfSecondPlayer
+          : scoreOfFirstPlayer,
       winnerId: winner.id!,
     );
 
@@ -115,6 +132,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
               width: 64,
               child: TextFormField(
                 onChanged: _onTextChanged,
+                onTap: _firstInputOnTap,
                 controller: _setScoreOfFirstPlayer,
                 enableInteractiveSelection: false,
                 inputFormatters: [
@@ -187,6 +205,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
               width: 64,
               child: TextFormField(
                 onChanged: _onTextChanged,
+                onTap: _secondInputOnTap,
                 controller: _setScoreOfSecondPlayer,
                 enableInteractiveSelection: false,
                 inputFormatters: [

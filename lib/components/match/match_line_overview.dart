@@ -204,11 +204,7 @@ class _MatchLineOverviewState extends State<MatchLineOverview> {
                 },
               )
           ],
-        )
-        
-        
-
-        : Container();
+        ) : Container();
   }
   
   void _matchDetailModal(BuildContext context) {
