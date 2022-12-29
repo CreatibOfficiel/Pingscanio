@@ -68,7 +68,7 @@ class _SetScoreInputState extends State<SetScoreInput> {
           );
           return;
         }
-      } 
+      }
 
       createSet(scoreOfFirstPlayer > scoreOfSecondPlayer
           ? widget.firstPlayer

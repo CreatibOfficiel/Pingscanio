@@ -78,49 +78,52 @@ class _SetScoreState extends State<SetScore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Ajouter un match",
-                style: ThemeText.textTitle.copyWith(
-                  color: ThemeColor.neutralColor_100,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+          margin: const EdgeInsets.only(left: 16, right: 16, top: 60),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Ajouter un match",
+                  style: ThemeText.textTitle.copyWith(
+                    color: ThemeColor.neutralColor_100,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Match serré ou grosse raclée ?",
-                style: ThemeText.textRegular.copyWith(
-                  color: ThemeColor.neutralColor_300,
+                const SizedBox(height: 8),
+                Text(
+                  "Match serré ou grosse raclée ?",
+                  style: ThemeText.textRegular.copyWith(
+                    color: ThemeColor.neutralColor_300,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 32),
-              SetScoreInput(
-                  firstPlayer: widget.firstPlayer,
-                  secondPlayer: widget.secondPlayer,
-                  setNumber: 1,
-                  addSet: _addSet),
-              if (_sets.isNotEmpty) ...[
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
                 SetScoreInput(
                     firstPlayer: widget.firstPlayer,
                     secondPlayer: widget.secondPlayer,
-                    setNumber: 2,
+                    setNumber: 1,
                     addSet: _addSet),
+                if (_sets.isNotEmpty) ...[
+                  const SizedBox(height: 24),
+                  SetScoreInput(
+                      firstPlayer: widget.firstPlayer,
+                      secondPlayer: widget.secondPlayer,
+                      setNumber: 2,
+                      addSet: _addSet),
+                ],
+                if (_sets.length >= 2 && _matchInThreeSets) ...[
+                  const SizedBox(height: 24),
+                  SetScoreInput(
+                      firstPlayer: widget.firstPlayer,
+                      secondPlayer: widget.secondPlayer,
+                      setNumber: 3,
+                      addSet: _addSet),
+                ],
+                const SizedBox(height: 16),
               ],
-              if (_sets.length >= 2 && _matchInThreeSets) ...[
-                const SizedBox(height: 24),
-                SetScoreInput(
-                    firstPlayer: widget.firstPlayer,
-                    secondPlayer: widget.secondPlayer,
-                    setNumber: 3,
-                    addSet: _addSet),
-              ],
-              const SizedBox(height: 16),
-            ],
+            ),
           ),
         ),
       ),

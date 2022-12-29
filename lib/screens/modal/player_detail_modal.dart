@@ -25,12 +25,9 @@ class _PlayerDetailModalState extends State<PlayerDetailModal> {
   bool isLoaded = false;
 
   late final List<MatchGame> matches;
-  late final String lastMatchDate;
 
   void initData() async {
     matches = await MatchService().getRecentMatchesOfPlayer(player.id!);
-
-    lastMatchDate = DateFormat('dd/MM/yyyy').format(matches[0].date);
 
     setState(() {
       isLoaded = true;
@@ -102,7 +99,7 @@ class _PlayerDetailModalState extends State<PlayerDetailModal> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Dernier match joué le :\n${player.gameCount == 0 ? 'N/A' : lastMatchDate}',
+                        'Nombre de matchs joués :\n${player.gameCount == 0 ? 'N/A' : player.gameCount}',
                         style: ThemeText.textRegular.copyWith(
                           color: ThemeColor.neutralColor_300,
                         ),

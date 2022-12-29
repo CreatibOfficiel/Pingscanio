@@ -99,6 +99,7 @@ class RankedLinePlayer extends StatelessWidget {
   }
 
   void _playerDetailModal(BuildContext context) {
+    print('player detail modal' + player.fullName);
     showModalBottomSheet(context: context, shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),

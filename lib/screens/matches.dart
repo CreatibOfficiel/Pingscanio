@@ -5,6 +5,8 @@ import 'package:pingscanio/objects/match_game.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
 
+import '../utils/lifecycle_event.dart';
+
 class Matches extends StatefulWidget {
   const Matches({super.key});
 
@@ -35,6 +37,10 @@ class _MatchesState extends State<Matches> {
   }
 
   getMatches() async {
+    setState(() {
+      isLoaded = false;
+    });
+
     matches = await MatchService().getRecentMatches();
 
     setState(() {
@@ -45,6 +51,12 @@ class _MatchesState extends State<Matches> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addObserver(LifecycleEventHandler(
+      resumeCallBack: () async => setState(() {
+        getMatches();
+    })));
+
     getMatches();
   }
 

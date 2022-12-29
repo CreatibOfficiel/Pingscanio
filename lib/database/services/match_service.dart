@@ -46,5 +46,4 @@ class MatchService {
             element.date.isAfter(DateTime.now().subtract(const Duration(days: 7)))).toList();
     return matchesOfPlayer;
   }
-
 }

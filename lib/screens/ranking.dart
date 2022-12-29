@@ -6,6 +6,8 @@ import 'package:pingscanio/objects/player.dart';
 import 'package:pingscanio/theme/colors.dart';
 import 'package:pingscanio/theme/text_styles.dart';
 
+import '../utils/lifecycle_event.dart';
+
 class Ranking extends StatefulWidget {
   const Ranking({super.key});
 
@@ -19,6 +21,10 @@ class _RankingState extends State<Ranking> {
   bool isLoaded = false;
 
   void getPlayers() async {
+    setState(() {
+      isLoaded = false;
+    });
+
     players = await PlayerService().getRankedPlayers();
 
     if (players.isEmpty) {
@@ -44,6 +50,12 @@ class _RankingState extends State<Ranking> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addObserver(LifecycleEventHandler(
+      resumeCallBack: () async => setState(() {
+        getPlayers(); 
+    })));
+
     getPlayers();
   }
 
