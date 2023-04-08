@@ -40,6 +40,6 @@ L’utilisateur doit être en capacité de faire les choses suivantes :</br>
 - Visualiser les derniers matchs entre deux joueurs
 - Visualiser les derniers matchs d'un joueur spécifique
 - Ajouter des joueurs à l'application
-- Ajouter des matchs à l'application et voir l'incidence que ce match sur leur elo respectif
+- Ajouter des matchs à l'application et voir l'incidence que ce match a sur leur elo respectif
 
 ---
